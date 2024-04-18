@@ -5,18 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/public/index.css">
 </head>
 
 <body>
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <img class="hampter" style="width: 200px;" src="/public/hampter.png" alt="hampter">
     <form action="/addItem" class="to-do-input">
-        <input type="text" class="text-input" id="task-name"><br>
-        <input type="text" class="text-input" id="task-desc"><br>
-        <input type="submit" value="Submit"><br>
+        <div class="input-group">
+            <label for="task-name">Task Title</label><br>
+            <input type="text" class="text-input" id="task-name"><br>
+        </div>
+        <div class="input-group">
+            <label for="task-name">Task Description</label><br>
+            <textarea type="text" class="text-input" id="task-desc"></textarea><br>
+        </div>
+        <input class="submit-button" type="submit" value="submit"><br>
     </form>
     <hr>
     <div hx-get="/getToDoItems" class="to-do-items-list">
         <div></div>
+    </div>
+    <div class="to-do-item">
+        <div class="to-do-item-content">
+            <div class="to-do-item-title">
+                bugfix
+            </div>
+            <div class="to-do-item-text">
+                fix bugs on the front end mmm js my favourite
+            </div>
+            <div class="to-do-item-date">
+                10-10-1910
+            </div>
+        </div>
+        <div class="to-do-item-controls">
+            <a target="_blank" class="to-do-item-close">
+                &#x2716;
+            </a>
+            <a target="_blank" class="to-do-item-check">
+                &#x2714;
+            </a>
+        </div>
     </div>
 </body>
 

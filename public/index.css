@@ -1,0 +1,117 @@
+:root {
+    --main-bg: #f9f8ed;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--main-bg);
+}
+
+.hampter {
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.to-do-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: fit-content;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    width: 500px;
+    background-color: white;
+    margin: 5px;
+}
+
+.to-do-item-title {
+    font-size: 1.5em;
+    border-bottom: 1px solid black;
+    padding-bottom: 3px;
+}
+
+.to-do-item-text {
+    padding-top: 3px;
+}
+
+.to-do-item-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-left: 5px;
+}
+
+.to-do-item-date {
+    font-size: smaller;
+    margin-top: auto;
+}
+
+.to-do-item-controls {
+    display: flex;
+    flex-direction: column;
+    float: right;
+    margin-left: 5px;
+    padding-left: 5px;
+    border-left: 1px solid black;
+}
+
+.to-do-item-check,
+.to-do-item-close {
+    text-align: center;
+    height: 25px;
+    width: 25px;
+    font-size: 1.5em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    -webkit-text-stroke: 1.2px black;
+    -webkit-text-fill-color: white;
+}
+
+a.to-do-item-close:hover {
+    background-color: red;
+    cursor: pointer
+}
+
+a.to-do-item-check:hover {
+    background-color: green;
+    cursor: pointer
+}
+
+input[type=submit] {
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 5px;
+    background: none;
+    background-color: white;
+    border: 1px solid black;
+    font-size: 1.2em;
+    text-decoration: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+input[type=submit]:hover {
+    cursor: pointer;
+    background-color: green;
+}
+
+input[type=text] {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+
+}
+
+.input-group {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+textarea {
+    border: 1px solid black;
+    border-radius: 5px;
+}

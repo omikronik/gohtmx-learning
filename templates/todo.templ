@@ -1,0 +1,12 @@
+package templates
+
+type TodoItem struct {
+	id       int
+	title    string
+	content  string
+	complete bool
+	createOn time.Time
+}
+
+templ TodoList(items ToDoItem[]) {
+}
