@@ -1,12 +1,37 @@
 package templates
 
-type TodoItem struct {
-	id       int
-	title    string
-	content  string
-	complete bool
-	createOn time.Time
+import (
+	"gohtmx-learning/todo"
+)
+
+templ TodoList(items []todo.TodoItem) {
+	<div>
+		for _, item := range items {
+			@ToDoItem(item)
+		}
+	</div>
 }
 
-templ TodoList(items ToDoItem[]) {
+templ ToDoItem(item todo.TodoItem) {
+	<div class="to-do-item" id={ item.Id }>
+		<div class="to-do-item-content">
+			<div class="to-do-item-title">
+				{ item.Title }
+			</div>
+			<div class="to-do-item-text">
+				{ item.Content }
+			</div>
+			<div class="to-do-item-date">
+				{ item.CreatedOn.Format("2006-01-02 15:04:05") }
+			</div>
+		</div>
+		<div class="to-do-item-controls">
+			<a target="_blank" class="to-do-item-close">
+				&#x2716;
+			</a>
+			<a target="_blank" class="to-do-item-check">
+				&#x2714;
+			</a>
+		</div>
+	</div>
 }

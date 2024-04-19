@@ -5,22 +5,31 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"time"
 
+	"gohtmx-learning/templates"
 	"gohtmx-learning/todo"
 
-	"github.com/google/uuid"
 	"github.com/joho/godotenv"
 )
 
 func RootHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Root hit")
 	http.ServeFile(w, r, "web/index.html")
 }
 
-func GetToDoItemsHandler(items []todo.TodoItem) http.HandlerFunc {
+func CreateToDoItemsHandler(items *[]todo.TodoItem) http.HandlerFunc {
+	fmt.Println("Create to do items hit")
 	return func(w http.ResponseWriter, r *http.Request) {
+		decoder := json.NewDecoder(r.Body)
+		var t todo.TodoItemRequest
+		err := decoder.Decode(&t)
+		if err != nil {
+			fmt.Println("Something happen")
+			panic(err)
+		}
+		items := append(*items, todo.NewToDoItem(t.Title, t.Content, false))
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(items)
+		templates.TodoList(items).Render(r.Context(), w)
 	}
 }
 
@@ -37,15 +46,14 @@ func main() {
 	}
 
 	todoItems := []todo.TodoItem{
-		{id: uuid.NewString(), title: "Task 1", content: "This is the content for task 1", complete: false, createdOn: time.Now()},
-		{id: uuid.NewString(), title: "Task 2", content: "This is the content for task 2", complete: false, createdOn: time.Now()},
+		todo.NewToDoItem("Task 1", "This is the content for task 1", false),
+		todo.NewToDoItem("Task 2", "This is the content for task 2", false),
 	}
 
 	server := http.NewServeMux()
 	server.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
+	server.HandleFunc("POST /createtodoitem", CreateToDoItemsHandler(&todoItems))
 	server.HandleFunc("/", RootHandler)
-	server.HandleFunc("GET /todoitems", GetToDoItemsHandler(todoItems))
-
 	fmt.Printf("Started server on port: %s\n", PORT)
 	if err := http.ListenAndServe(PORT, server); err != nil {
 		fmt.Print(err)

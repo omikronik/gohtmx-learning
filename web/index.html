@@ -11,7 +11,7 @@
 <body>
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     <img class="hampter" style="width: 200px;" src="/public/hampter.png" alt="hampter">
-    <form action="/addItem" class="to-do-input">
+    <form hx-post="/createtodoitem" hx-target="#to-do-item-list" class="to-do-input">
         <div class="input-group">
             <label for="task-name">Task Title</label><br>
             <input type="text" class="text-input" id="task-name"><br>
@@ -23,7 +23,7 @@
         <input class="submit-button" type="submit" value="submit"><br>
     </form>
     <hr>
-    <div hx-get="/getToDoItems" class="to-do-items-list">
+    <div id="to-do-item-list" class="to-do-items-list">
         <div></div>
     </div>
     <div class="to-do-item">
